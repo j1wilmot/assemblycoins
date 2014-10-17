@@ -290,7 +290,7 @@ def tx_queue():
         dbstring="delete from tx_queue * where randomid='"+randomid+"';"
         databases.dbexecute(dbstring,False)
 
-    elif len(result)>10:
+    elif len(str(result))>10:
       print "HEARD TX RESULT: "+str(result)
       dbstring2="update tx_queue set txhash='"+str(result) +"', success='True' where randomid='"+randomid+"';"
       databases.dbexecute(dbstring2,False)
