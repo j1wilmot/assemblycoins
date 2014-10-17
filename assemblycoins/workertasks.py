@@ -356,11 +356,11 @@ def checkaddresses():
       description=address[8]
       txdata=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description)
 
-      txhash=txdata[0]
+      txhash=txdata['transaction_hash']
       txhash=txhash+":0" #issuance always first output
 
       #mark as completed
-      if len(txhash)>10:
+      if not txhash=="None:0":
         databases.edit_address(fromaddr, value, value, colornumber)
         their_email=address[9]
         email_commands.email_creation(str(their_email), str(colorname), str(colornumber), str(description), str(txhash))
