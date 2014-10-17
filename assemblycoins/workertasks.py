@@ -280,7 +280,7 @@ def tx_queue():
       print "ERROR processing queued TX from "+str(fromaddr)
       result=None
     result=result[0]
-    if result is None:
+    if result is None or str(result)=='None':
       print "No response heard from Bitcoin Network"
       firsttriedatblock=tx[6]
       if firsttriedatblock==-1:
