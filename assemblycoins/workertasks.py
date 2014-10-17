@@ -280,7 +280,7 @@ def tx_queue():
       print "ERROR processing queued TX from "+str(fromaddr)
       result=None
     result=result[0]
-    if result is None or str(result)=='None':
+    if result is None:
       print "No response heard from Bitcoin Network"
       firsttriedatblock=tx[6]
       if firsttriedatblock==-1:
@@ -290,7 +290,7 @@ def tx_queue():
         dbstring="delete from tx_queue * where randomid='"+randomid+"';"
         databases.dbexecute(dbstring,False)
 
-    else:
+    elif len(result)>10:
       print "HEARD TX RESULT: "+str(result)
       dbstring2="update tx_queue set txhash='"+str(result) +"', success='True' where randomid='"+randomid+"';"
       databases.dbexecute(dbstring2,False)
