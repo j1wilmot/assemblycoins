@@ -430,6 +430,7 @@ def check_for_misspents(block_height):   #BLOCKHEIGHT INPUT MEANS CHECK FOR OUTP
 
     spent=bitsource.check_if_output_misspent(txhash, index)
     if spent:
+      print "output is spent: "+str(txhash_index)
       index=str(index)
       #MARK AS SPENT IN OUTPUTS DB,  MARK spent_at_transactionhash = "DESTROYED"
       dbstring="UPDATE outputs SET spent=true, spent_at_txhash='destroyed' where txhash_index='"+str(txhash)+":"+str(index)+"';"
