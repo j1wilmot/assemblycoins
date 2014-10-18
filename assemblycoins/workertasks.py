@@ -252,7 +252,7 @@ def tx_queue_batches():
 
         if result is None:
           print "No response heard from Bitcoin Network"
-        else:
+        elif not str(result)=="None":
           print "HEARD TX RESULT: "+str(result)
 
           for id in rowlist:
