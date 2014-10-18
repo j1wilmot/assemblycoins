@@ -241,6 +241,7 @@ def tx_queue_batches():
         if len(dest_array)>6:
           fee_each=fee_each*(1+len(dest_array)/6)
 
+        print str(fromaddr)+ " / "+ str(dest_array) + " / "+str(fee_each)+ " / "+str(privatekey)+" / " +str(sourceaddress)+" / "+str(coloramt_array)+" / "+str(othermeta)
         result=transactions.transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array, othermeta)
         try:
           result=result[0]
