@@ -12,8 +12,12 @@ def get_current_block_localnode():
   return int(count)
 
 def get_current_block():
-  response=requests.get("https://blockchain.info/q/getblockcount")
-  return int(str(response.content))
+  try:
+    response=requests.get("https://blockchain.info/q/getblockcount")
+    result=int(str(response.content))
+  except:
+    result= databases.dbexecute("select lastblockdone from meta;", True)[0][0]
+  return result
 
 def get_transaction_list(blockn):
   response=requests.get("https://bitcoin.toshi.io/api/v0/blocks/"+str(blockn)+"/transactions")
