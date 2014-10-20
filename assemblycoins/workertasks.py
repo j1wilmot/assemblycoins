@@ -368,7 +368,9 @@ def checkaddresses():
         txhash=txhash+":0" #issuance always first output
 
         #mark as completed
-        if not txhash=="None:0":
+        if txhash=="None:0":
+          k=1 #do nothing
+        else:
           databases.edit_address(fromaddr, value, value, colornumber)
           their_email=address[9]
           email_commands.email_creation(str(their_email), str(colorname), str(colornumber), str(description), str(txhash))
