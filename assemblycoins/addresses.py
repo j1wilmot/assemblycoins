@@ -16,17 +16,19 @@ def get_unspent(address):
   url='https://blockchain.info/unspent?active='+str(address)#+"?api_code="+blockchain_api_code
   response = requests.get(url).content
   if response=='No free outputs to spend':
-    return {}
+    return []
   else:
-    jsonresponse = json.loads(response)
-
-    result=[]
-    for x in jsonresponse['unspent_outputs']:
-      r={}
-      r['value']=x['value']
-      r['output']=str(x['tx_hash'])+":"+str(x['tx_output_n'])
-      result.append(r)
-    return result
+    try:
+      jsonresponse = json.loads(response)
+      result=[]
+      for x in jsonresponse['unspent_outputs']:
+        r={}
+        r['value']=x['value']
+        r['output']=str(x['tx_hash'])+":"+str(x['tx_output_n'])
+        result.append(r)
+      return result
+    except:
+      return []
 
 def base58encode(n):
     result = ''
