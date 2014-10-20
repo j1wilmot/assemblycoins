@@ -262,6 +262,7 @@ def colorholders(color_address=None):
   jsonresponse['color_address']=color_address
   jsonresponse['issuing_address']=source_address
   jsonresponse['color_name']=color_name
+
   for x in answer:
     r={}
     r['public_address']=x

@@ -17,6 +17,8 @@ def get_current_block():
     result=int(str(response.content))
   except:
     result= databases.dbexecute("select lastblockdone from meta;", True)[0][0]
+    print "I am using the DB for the last block, blockchain is not responding"
+    print result
   return result
 
 def get_transaction_list(blockn):
