@@ -24,7 +24,7 @@ def get_unspent(address):
       for x in jsonresponse['unspent_outputs']:
         r={}
         r['value']=x['value']
-        r['output']=str(x['tx_hash'])+":"+str(x['tx_output_n'])
+        r['output']=str(x['tx_hash'].decode('hex')[::-1].encode('hex'))+":"+str(x['tx_output_n'])
         result.append(r)
       return result
     except:
