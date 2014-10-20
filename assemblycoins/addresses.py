@@ -13,7 +13,7 @@ blockchain_api_code = os.environ['BLOCKCHAIN_API_CODE']
 secure_key_length=60
 
 def get_unspent(address):
-  url='https://blockchain.info/unspent?active='+str(address)+"?api_code="+blockchain_api_code
+  url='https://blockchain.info/unspent?active='+str(address)#+"?api_code="+blockchain_api_code
   response = requests.get(url).content
   if response=='No free outputs to spend':
     return {}
