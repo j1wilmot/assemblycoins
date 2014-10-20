@@ -222,7 +222,7 @@ def tx_queue_batches():
           color_needed=color_needed+tx[5]
           fee_each=float(tx[3])*0.00000001
           btc_needed=btc_needed+int(transactions.dust*100000000) #INTEGER, IN SATOSHIs
-          feestotal=feestotal+(int(tx[3])
+          feestotal=feestotal+int(tx[3])
 
           if tx[5]>0:
             dest_array.append(tx[2])
