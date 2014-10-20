@@ -500,6 +500,8 @@ def transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddre
   responses=[]
   if not coloraddress is None:
     if len(coloraddress)>0:
+      print "finding inouts for "
+      print str(fromaddr)+" / "+ str(coloraddress)+" / " +str(sum(coloramt_array))+" / "+str(btcneeded)
       inputs=find_transfer_inputs(fromaddr, coloraddress, sum(coloramt_array), btcneeded)
       print "inputs"
       print inputs

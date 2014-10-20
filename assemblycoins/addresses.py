@@ -123,10 +123,13 @@ def txs_received_by_address(publicaddress):
 def txs_sent_by_address(publicaddress):
   url='http://blockchain.info/address/'+str(publicaddress)+'?format=json'
   response=requests.get(url)
-  transactions=json.loads(response.content)
-  transactions=transactions['txs']
+  try:
+    transactions=json.loads(response.content)
+    transactions=transactions['txs']
 
-  senttxs=[]
+    senttxs=[]
+  except:
+    transactions=[]
 
   for tx in transactions:
     fromme=False
