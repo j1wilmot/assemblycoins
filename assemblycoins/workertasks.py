@@ -212,6 +212,7 @@ def tx_queue_batches():
         dest_array=[]
         fromaddr=sender
         btc_needed=0
+        feestotal=0
         rowlist=[]
 
         if len(txs)>10:  #limit outputs per TX
@@ -220,7 +221,8 @@ def tx_queue_batches():
         for tx in txs:
           color_needed=color_needed+tx[5]
           fee_each=float(tx[3])*0.00000001
-          btc_needed=btc_needed+(int(tx[3])+int(transactions.dust*100000000)) #INTEGER, IN SATOSHIs
+          btc_needed=btc_needed+int(transactions.dust*100000000)) #INTEGER, IN SATOSHIs
+          feestotal=feestotal+(int(tx[3])
 
           if tx[5]>0:
             dest_array.append(tx[2])
@@ -229,6 +231,10 @@ def tx_queue_batches():
           privatekey=tx[1]
           othermeta="multitransfer"
           rowlist.append(tx[10])
+
+        if feestotal>10000:
+          feestotal = 10000 *(1+len(txs)/5)
+        btc_needed=btc_needed+feestotal
 
         sourceaddress=color[0]
         coloraddress=databases.first_coloraddress_from_sourceaddress(sourceaddress)
