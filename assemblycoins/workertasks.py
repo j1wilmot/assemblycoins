@@ -214,8 +214,8 @@ def tx_queue_batches():
         btc_needed=0
         rowlist=[]
 
-        if len(txs)>25:  #limit outputs per TX
-          txs=txs[0:25]
+        if len(txs)>10:  #limit outputs per TX
+          txs=txs[0:10]
 
         for tx in txs:
           color_needed=color_needed+tx[5]

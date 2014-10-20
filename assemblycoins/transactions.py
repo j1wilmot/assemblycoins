@@ -436,7 +436,7 @@ def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
   if coloraddress is None:
     coloraddress="none"
   available_inputs=databases.dbexecute("SELECT * FROM OUTPUTS WHERE spent='False' and destination_address='"+fromaddr+"' and color_address='"+coloraddress+"';",True)
-  other_inputs=addresses.unspent(fromaddr)
+  other_inputs=addresses.get_unspent(fromaddr)
   totalfound=0
   btc=int(btc*100000000)
   totalavailable=0
@@ -500,7 +500,7 @@ def transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddre
   responses=[]
   if not coloraddress is None:
     if len(coloraddress)>0:
-      print "finding inouts for "
+      print "finding inputs for "
       print str(fromaddr)+" / "+ str(coloraddress)+" / " +str(sum(coloramt_array))+" / "+str(btcneeded)
       inputs=find_transfer_inputs(fromaddr, coloraddress, sum(coloramt_array), btcneeded)
       print "inputs"
