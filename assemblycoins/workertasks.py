@@ -215,8 +215,8 @@ def tx_queue_batches():
         feestotal=0
         rowlist=[]
 
-        if len(txs)>25:  #limit outputs per TX
-          txs=txs[0:25]
+        if len(txs)>15:  #limit outputs per TX
+          txs=txs[0:15]
 
         for tx in txs:
           color_needed=color_needed+tx[5]
