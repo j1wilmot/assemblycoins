@@ -358,8 +358,12 @@ def checkaddresses():
       private_key=address[1]
       ticker=address[9]
       description=address[8]
-      txdata=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description)
 
+      try:
+        txdata=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description)
+      except:
+        print "ERROR CREATING NEW COIN"
+        print str(fromaddr)+" / "+str(colornumber)+" / "+str(colorname)+" / "+str(destination)+" / "+str(fee_each)+" / "+str(private_key)+" / "+str(description)
 
       try:
         txhash=txdata['transaction_hash']
