@@ -60,6 +60,7 @@ def make_raw_transaction(fromaddress,amount,destination, fee):
       try:
         tx=mktx(ins,outs)
       except:
+        tx=None
         print "PROBLEM MAKING TX"
         print ins
         print ''
