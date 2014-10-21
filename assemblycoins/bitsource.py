@@ -7,13 +7,15 @@ import databases
 import node
 import os
 
+blockchain_api_code = os.environ['BLOCKCHAIN_API_CODE']
+
 def get_current_block_localnode():
   count=node.connect("getblockcount",[])
   return int(count)
 
 def get_current_block():
   try:
-    response=requests.get("https://blockchain.info/q/getblockcount")
+    response=requests.get("https://blockchain.info/q/getblockcount?api_code="+str(blockchain_api_code))
     result=int(str(response.content))
   except:
     result= databases.dbexecute("select lastblockdone from meta;", True)[0][0]
