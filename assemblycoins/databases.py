@@ -90,10 +90,15 @@ def read_address(public_address):
   return result
 
 def add_color(color_address, source_address, total_issued, color_name):
-  dbstring="INSERT INTO colors (color_address, source_address, total_issued, color_name)"
-  dbstring=dbstring+" VALUES ('"+color_address+"','"+source_address+"','"+total_issued+"','"+color_name+"');"
-  #print dbstring
-  result=dbexecute(dbstring,False)
+
+  previous_source = dbexecute("select * from colors where source_address='"+str(source_address)+"'", True)
+  if len(previous_source)>0:
+    result=dbexecute("update colors set color_address='"+str(color_address)+"', total_issued='"+str(total_issued)+"' where source_address='"+str(source_address)+"';",False)
+  else:
+    dbstring="INSERT INTO colors (color_address, source_address, total_issued, color_name)"
+    dbstring=dbstring+" VALUES ('"+color_address+"','"+source_address+"','"+total_issued+"','"+color_name+"');"
+    #print dbstring
+    result=dbexecute(dbstring,False)
   return result
 
 def edit_color(color_address, total_issued):
