@@ -308,7 +308,6 @@ def tx_queue():
       print "RESPONSE HEARD TYPE "+str(postresponse.status_code)
       print "RESPONSE CONTENTS: "+str(postresponse.content)
 
-
 def blocks_outputs(blockend):
   lastblockprocessed=databases.dbexecute("SELECT * FROM META;",True)
   currentblock=bitsource.get_current_block()
@@ -432,8 +431,8 @@ def read_color_names():
     except:
       print "no name found for source: "+str(address)
 
-def check_for_misspents(block_height):   #BLOCKHEIGHT INPUT MEANS CHECK FOR OUTPUTS SINCE THIS BLOCK HEIGHT
-  txs=databases.dbexecute("select * from outputs where blockmade>="+str(block_height)+";",True)
+def check_for_misspents(block_height_start, block_height_end):   #BLOCKHEIGHT INPUT MEANS CHECK FOR OUTPUTS SINCE THIS BLOCK HEIGHT
+  txs=databases.dbexecute("select * from outputs where blockmade>="+str(block_height) +" and blockmade<="+str(block_height_end)+";",True)
   for tx in txs:
     txhash_index=tx[7]
     txhash_index=txhash_index.split(":")
