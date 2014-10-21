@@ -493,7 +493,7 @@ def transfer_tx(fromaddr, dest, fee, privatekey, sourceaddress, coloramt, otherm
 #MANY AT ONCE
 def transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array, othermeta):
   m=len(dest_array)
-  btcneeded=fee_each*(1)+dust*m
+  btcneeded=fee_each*(1+m/12)+dust*m
   coloraddress=databases.first_coloraddress_from_sourceaddress(sourceaddress)
   result="No Color Found"
   inputcoloramt=0

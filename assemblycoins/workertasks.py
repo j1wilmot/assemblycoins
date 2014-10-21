@@ -364,7 +364,10 @@ def checkaddresses():
       try:
         txhash=txdata['transaction_hash']
       except:
-        txhash = "None"
+        txhash = "Error"
+        print "ERROR reading txdata"
+        print txdata
+        
       txhash=txhash+":0" #issuance always first output
         #mark as completed
       if txhash=="None:0":
