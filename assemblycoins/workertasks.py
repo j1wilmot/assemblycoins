@@ -367,7 +367,7 @@ def checkaddresses():
         txhash = "Error"
         print "ERROR reading txdata"
         print txdata
-        
+
       txhash=txhash+":0" #issuance always first output
         #mark as completed
       if txhash=="None:0":
@@ -437,7 +437,7 @@ def read_color_names():
       print "no name found for source: "+str(address)
 
 def check_for_misspents(block_height_start, block_height_end):   #BLOCKHEIGHT INPUT MEANS CHECK FOR OUTPUTS SINCE THIS BLOCK HEIGHT
-  txs=databases.dbexecute("select * from outputs where blockmade>="+str(block_height) +" and blockmade<="+str(block_height_end)+";",True)
+  txs=databases.dbexecute("select * from outputs where blockmade>="+str(block_height_start) +" and blockmade<="+str(block_height_end)+";",True)
   for tx in txs:
     txhash_index=tx[7]
     txhash_index=txhash_index.split(":")
