@@ -360,22 +360,24 @@ def checkaddresses():
       description=address[8]
       txdata=transactions.make_new_coin(fromaddr, colornumber, colorname, destination, fee_each, private_key, description)
 
+
       try:
         txhash=txdata['transaction_hash']
-        txhash=txhash+":0" #issuance always first output
-
-        #mark as completed
-        if txhash=="None:0":
-          k=1 #do nothing
-        else:
-          databases.edit_address(fromaddr, value, value, colornumber)
-          their_email=address[9]
-          email_commands.email_creation(str(their_email), str(colorname), str(colornumber), str(description), str(txhash))
-          databases.dbexecute("insert into colors (source_address, color_name) values ('"+fromaddr+"','"+colorname+"');",False)
       except:
-        print "something went wrong AFTER make_new_coin"
-        print txdata
-        print ''
+        txhash = "None"
+      txhash=txhash+":0" #issuance always first output
+        #mark as completed
+      if txhash=="None:0":
+        k=1 #do nothing
+      else:
+        databases.edit_address(fromaddr, value, value, colornumber)
+        their_email=address[9]
+        email_commands.email_creation(str(their_email), str(colorname), str(colornumber), str(description), str(txhash))
+        databases.dbexecute("insert into colors (source_address, color_name) values ('"+fromaddr+"','"+colorname+"');",False)
+      # except:
+      #   print "something went wrong AFTER make_new_coin"
+      #   print txdata
+      #   print ''
 
       #add entry to colors db
       # #referencehex=bitsource.tx_lookup(specific_inputs)
