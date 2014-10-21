@@ -57,7 +57,14 @@ def make_raw_transaction(fromaddress,amount,destination, fee):
       if extra>=dust*100000000:
         outs.append({'value':extra, 'address':fromaddress})
 
-      tx=mktx(ins,outs)
+      try:
+        tx=mktx(ins,outs)
+      except:
+        print "PROBLEM MAKING TX"
+        print ins
+        print ''
+        print outs
+        print ''
       #print tx
       return tx
 
