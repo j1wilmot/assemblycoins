@@ -71,7 +71,6 @@ def oa_in_block(blockn):
   return oatxs
 
 def output_db(blockn):
-
     #ADD OUTPUTS TO DB assuming correctness
     txdata=oa_in_block(blockn)
     if not txdata is None:
@@ -266,7 +265,6 @@ def tx_queue_batches():
             dbstring2="update tx_queue set txhash='"+str(result) +"', success='True' where randomid='"+str(id)+"';"
             print dbstring2
             databases.dbexecute(dbstring2,False)
-
 
 def tx_queue():
   dbstring="select * from tx_queue where success='False';"

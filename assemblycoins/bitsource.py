@@ -211,4 +211,5 @@ def check_if_output_misspent(txhash, index):
       no_opreturnfound=False
   if no_opreturnfound and tx['outputs'][index]['spent']:
     spent=True
+  print str(txhash)+ " is spent: " +str(spent)
   return spent
