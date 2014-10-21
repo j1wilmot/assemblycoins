@@ -251,6 +251,7 @@ def tx_queue_batches():
         try:
           result=result[0]
         except:
+          print result
           result=None
         #except:
         #  print "ERROR processing queued TX from "+str(fromaddr)
