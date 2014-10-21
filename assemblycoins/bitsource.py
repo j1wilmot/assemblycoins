@@ -213,4 +213,6 @@ def check_if_output_misspent(txhash, index):
     spent=True
   if spent:
     print str(txhash)+ " is spent: "
+  else:
+    print str(txhash)
   return spent
