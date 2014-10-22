@@ -171,7 +171,7 @@ def searchbyname(the_name=None):
 def getcoloraddressfromsource(source_address=None):
   coloraddress = "not found"
   if not source_address == None:
-    coloraddress = dbexecute("select color_address from colors where source_address='"+str(source_address)+"'", True)
+    coloraddress = databases.dbexecute("select color_address from colors where source_address='"+str(source_address)+"'", True)
 
   jsonresponse['color_address']=coloraddress
   jsonresponse=json.dumps(jsonresponse)
