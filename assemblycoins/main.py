@@ -449,7 +449,18 @@ def issuenewcoinsserverside():   #TO ONE RECIPIENT ADDRESS
   fee_each=str(jsoninput['fee_each'])
   name=str(jsoninput['name'])
   othermeta=str(name)
-  response=transactions.create_issuing_tx(public_address, recipient, fee_each, private_key, more_coins, 0, othermeta)
+
+  specific_inputs = addresses.get_unspent(public_address)
+  #REMOVE COLORED OUTPUTS FROM THIS
+  for x in specific_inputs:
+    txhash_index = x['output']
+    found = databases.dbexecute("select * from outputs where spent='False' and txhash_index='"+str(txhash_index)+"';",True)
+    nfound = len(found)
+    if nfound>0:
+      specific_inputs.remove(x)
+
+  print specific_inputs  
+  #response=transactions.create_issuing_tx(public_address, recipient, fee_each, private_key, more_coins, specific_inputs, othermeta)
   jsonresponse={}
   jsonresponse['transaction_hash']=response
   jsonresponse=json.dumps(jsonresponse)
