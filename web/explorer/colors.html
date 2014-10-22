@@ -90,11 +90,12 @@ if(color[0]==='1'){
 
   color = jsondata['color_address'];
 
-  var titl=document.getElementById('title');
-  title.innerHTML=color;
-  colordata(color);
+  new_url = "https://coins.assembly.com/v1/colors/"+color.toString();
+  window.location.href = new_url;
 }
-
+var titl=document.getElementById('title');
+title.innerHTML=color;
+colordata(color);
 
 
 </script>
