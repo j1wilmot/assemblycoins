@@ -141,10 +141,13 @@ def color_holders(color_address):
       answer[x[5]]=int(x[1])
 
   #sort by quantity
-  newanswer={}
+  newanswer=[]
   sortedkeys = sorted(answer, key=lambda key: answer[key])
   for x in sortedkeys[::-1]:
-    newanswer[x] = answer[x]
+    pairr = {}
+    pairr['public_address'] = x
+    pairr['quantity'] = answer[x]
+    newanswer.append(pairr)
 
   return newanswer
 

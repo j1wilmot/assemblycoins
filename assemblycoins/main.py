@@ -277,8 +277,8 @@ def colorholders(color_address=None):
 
   for x in answer:
     r={}
-    r['public_address']=x
-    r['quantity']=answer[x]
+    r['public_address']=x['public_address']
+    r['quantity']=x['quantity']
     jsonresponse['owners'].append(r)
 
   answer=json.dumps(jsonresponse)
