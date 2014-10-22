@@ -8,6 +8,8 @@
     <meta name="description" content="">
 		<!-- Redirect from 404 page to homepage -->
     
+    <meta http-equiv="refresh" content="8; url=/">
+    
     <link rel="canonical" href="https://coins.assembly.com">
 
     <!-- Styles -->
@@ -151,101 +153,9 @@ function search(){
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <div id="coinname"></div>
-<h2>Color Address</h2>
-<h3><div id="title"></div><br><small id="coin_source"></small><br><small id="cointotal"></small></h3>
-<br><br><br>
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <table id="colorplace" class="table">
-
-      </table>
-    </div>
-  </div>
-</div>
-
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script>
-
-
-
-function addrow(coloraddress, amount, islink, typ){
-  var addresstable= document.getElementById('colorplace');
-  if (islink)
-    {
-      addresstable.innerHTML=addresstable.innerHTML+"<tr><td><a href=https://coins.assembly.com/addresses/"+coloraddress+">"+coloraddress+"</a></td><td>"+amount.toString()+"</td></tr>";
-    }
-  else
-    {
-    addresstable.innerHTML=addresstable.innerHTML+"<tr><td>"+coloraddress+"</td><td>"+amount.toString()+"</td></tr>";
-    }
-
-
-}
-
-
-
-function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
-
-
-function colordata(color){
-  addrow("Public Address", "Amount", false, "");
-  var url="https://coins.assembly.com/v1/colors/"+color.toString();
-  var xmlHttp = null;
-  xmlHttp = new XMLHttpRequest();
-  xmlHttp.open( "GET", url, false );
-  xmlHttp.send( null );
-  var jsondata=JSON.parse(xmlHttp.responseText);
-  var leng=jsondata['owners'].length;
-  var sumcoins=0;
-
-  for (i=0;i<leng;i++)
-    {
-      var public_address=jsondata['owners'][i]['public_address'];
-      var quantity=jsondata['owners'][i]['quantity'];
-      sumcoins=sumcoins+parseFloat(quantity);
-      addrow(public_address, quantity, true, "color");
-    }
-
-    var cointot=document.getElementById('cointotal');
-    cointot.innerHTML=sumcoins.toString()+" Total Coins";
-
-    var coinsour=document.getElementById('coin_source');
-    coinsour.innerHTML="Source Address: <a href=https://coins.assembly.com/addresses/"+jsondata['issuing_address'].toString()+">"+jsondata['issuing_address'].toString()+"</a>";
-
-    if(jsondata['color_name'].length>0)
-      {
-        var coinnam=document.getElementById('coinname');
-        coinname.innerHTML="<h1>"+jsondata['color_name']+"</h1><br>";
-      }
-
-}
-
-var a=window.location.pathname
-var color=a.substring(8,a.length)
-
-if(color[0]==='1'){
-  var url="https://coins.assembly.com/v1/colors/source/"+color.toString();
-  var xmlHttp = null;
-  xmlHttp = new XMLHttpRequest();
-  xmlHttp.open( "GET", url, false );
-  xmlHttp.send( null );
-  var jsondata=JSON.parse(xmlHttp.responseText);
-
-  color = jsondata['color_address'];
-}
-
-var titl=document.getElementById('title');
-title.innerHTML=color;
-colordata(color);
-
-</script>
+      <br><br><br>
+<h1>Sorry this page does not exist.</h1>
+<h2>You are going to be redirected to the main page.</h2>
 
     </div>
   </div>

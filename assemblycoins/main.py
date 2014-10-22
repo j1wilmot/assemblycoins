@@ -167,6 +167,18 @@ def searchbyname(the_name=None):
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
+@app.route('v1/colors/source/<source_address')
+def getcoloraddressfromsource(source_address=None):
+  coloraddress = "not found"
+  if not source_address == None:
+    coloraddress = dbexecute("select color_address from colors where source_address='"+str(source_address)+"'", True)
+
+  jsonresponse['color_address']=coloraddress
+  jsonresponse=json.dumps(jsonresponse)
+  response=make_response(str(jsonresponse), 200)
+  response.headers['Content-Type'] = 'application/json'
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
 
 @app.route('/v1/colors/prepare', methods=['POST'])
 def givenewaddress():

@@ -79,6 +79,18 @@ function colordata(color){
 
 var a=window.location.pathname
 var color=a.substring(8,a.length)
+
+if(color[0]==='1'){
+  var url="https://coins.assembly.com/v1/colors/source/"+color.toString();
+  var xmlHttp = null;
+  xmlHttp = new XMLHttpRequest();
+  xmlHttp.open( "GET", url, false );
+  xmlHttp.send( null );
+  var jsondata=JSON.parse(xmlHttp.responseText);
+
+  color = jsondata['color_address'];
+}
+
 var titl=document.getElementById('title');
 title.innerHTML=color;
 colordata(color);
