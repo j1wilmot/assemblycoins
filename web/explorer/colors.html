@@ -89,10 +89,12 @@ if(color[0]==='1'){
   var jsondata=JSON.parse(xmlHttp.responseText);
 
   color = jsondata['color_address'];
+
+  var titl=document.getElementById('title');
+  title.innerHTML=color;
+  colordata(color);
 }
 
-var titl=document.getElementById('title');
-title.innerHTML=color;
-colordata(color);
+
 
 </script>
