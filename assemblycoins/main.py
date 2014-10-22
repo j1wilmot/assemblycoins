@@ -167,7 +167,7 @@ def searchbyname(the_name=None):
   response.headers['Access-Control-Allow-Origin']= '*'
   return response
 
-@app.route('v1/colors/source/<source_address>')
+@app.route('/v1/colors/source/<source_address>')
 def getcoloraddressfromsource(source_address=None):
   coloraddress = "not found"
   if not source_address == None:
