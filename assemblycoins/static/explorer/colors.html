@@ -239,11 +239,14 @@ if(color[0]==='1'){
   var jsondata=JSON.parse(xmlHttp.responseText);
 
   color = jsondata['color_address'];
-}
 
+  new_url = "https://coins.assembly.com/v1/colors/"+color.toString();
+  window.location.href = new_url;
+}
 var titl=document.getElementById('title');
 title.innerHTML=color;
 colordata(color);
+
 
 </script>
 
