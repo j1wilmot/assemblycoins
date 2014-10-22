@@ -139,7 +139,14 @@ def color_holders(color_address):
       answer[x[5]]=answer[x[5]]+int(x[1])
     else:
       answer[x[5]]=int(x[1])
-  return answer
+
+  #sort by quantity
+  newanswer={}
+  sortedkeys = sorted(answer, key=lambda key: answer[key])
+  for x in sortedkeys[::-1]:
+    newanswer[x] = answer[x]
+
+  return newanswer
 
 def first_coloraddress_from_sourceaddress(source_address):
   dbstring="SELECT color_address from colors where source_address='"+source_address+"';"
