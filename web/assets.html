@@ -29,7 +29,7 @@ function addrow(name, coloraddress, amount, islink){
     }
   else
     {
-    addresstable.innerHTML=addresstable.innerHTML+"<tr><td>"+name.toString()+"</td><td>coloraddress</td><td>"+amount.toString()+"</td></tr>";
+    addresstable.innerHTML=addresstable.innerHTML+"<tr><td>"+name.toString()+"</td><td>"+coloraddress+"</td><td>"+amount.toString()+"</td></tr>";
     }
 }
 
@@ -42,7 +42,7 @@ xmlHttp = new XMLHttpRequest();
 xmlHttp.open( "GET", url, false );
 xmlHttp.send( null );
 var jsondata=JSON.parse(xmlHttp.responseText);
-var leng=jsondata['color_created'].length;
+var leng=jsondata['colors_created'].length;
 var sumcoins=0;
 
 for (i=0;i<leng;i++)
@@ -50,7 +50,7 @@ for (i=0;i<leng;i++)
     var coin_name = jsondata['colors_created'][i]['coin_name'];
     var public_address=jsondata['colors_created'][i]['public_address'];
     var quantity=jsondata['colors_created'][i]['issued_amount'];
-    var color_address=jsondata['color_created'][i]['color_address'];
+    var color_address=jsondata['colors_created'][i]['color_address'];
     addrow(coin_name, color_address, quantity, true);
   }
 
