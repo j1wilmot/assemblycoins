@@ -151,7 +151,39 @@ function search(){
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      
+      <h2>Assets Created on Assembly</h2>
+
+<br><br><br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <table id="colorplace" class="table">
+
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+
+
+
+function addrow(name, coloraddress, amount, islink){
+  var addresstable= document.getElementById('colorplace');
+  if (islink)
+    {
+      addresstable.innerHTML=addresstable.innerHTML+"<tr><td>"+name.toString()+"</td><td><a href=https://coins.assembly.com/addresses/"+coloraddress+">"+coloraddress+"</a></td><td>"+amount.toString()+"</td></tr>";
+    }
+  else
+    {
+    addresstable.innerHTML=addresstable.innerHTML+"<tr><td>"+name.toString()+"</td><td>coloraddress</td><td>"+amount.toString()+"</td></tr>";
+    }
+
+
+}
+
     </div>
   </div>
 </div>

@@ -156,6 +156,24 @@ def colorbalances(public_address=None):
 
 #COLORS
 
+@app.route('/v1/colors/created')
+def showcreatedassets():
+  created_assets = databases.dbexecute("select distinct coin_name, issued_amount, public_address from addresses where amount_received>=amount_expected;", True)
+  jsonresponse={}
+  jsonresponse['colors_created']=[]
+  for x in created_assets:
+    a={}
+    a['coin_name'] = x[0]
+    a['issued_amount'] = x[1]
+    a['public_address']=x[2]
+    jsonresponse['colors_created'].append(a)
+
+  jsonresponse=json.dumps(jsonresponse)
+  response=make_response(str(jsonresponse), 200)
+  response.headers['Content-Type'] = 'application/json'
+  response.headers['Access-Control-Allow-Origin']= '*'
+  return response
+
 @app.route('/v1/colors/name/<the_name>')
 def searchbyname(the_name=None):
   the_name = the_name.replace ("_", " ")
