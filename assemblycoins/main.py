@@ -166,6 +166,7 @@ def showcreatedassets():
     a['coin_name'] = x[0]
     a['issued_amount'] = x[1]
     a['public_address']=x[2]
+    a['color_address'] = databases.dbexecute("select color_address from colors where source_address='"+str(x[2])+"';", True)
     jsonresponse['colors_created'].append(a)
 
   jsonresponse=json.dumps(jsonresponse)
