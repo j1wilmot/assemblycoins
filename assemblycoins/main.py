@@ -42,6 +42,10 @@ def quickstart():
 def gotoaddressexplorer(address=None):
   return render_template('addresses.html', the_address=address)
 
+@app.route('/assets', methods=['GET'])
+def seeallassets():
+  return app.send_static_file('assets.html')
+
 @app.route('/colors/<color>', methods=['GET'])
 def gotocolorexplorer(color=None):
   return render_template('colors.html', the_color=color)
