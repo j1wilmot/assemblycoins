@@ -554,6 +554,7 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
   change_outs=[]
   colorlist=[]
   changecolorlist=[]
+  btc_change_outs=[]
   totalbtcin = 0
 
   for i in range(0,l):
@@ -568,17 +569,18 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
     outs.append({'address': toaddr, 'value': int(dust*100000000)})
     colorlist.append(toamount)
     change_outs.append({'address': fromaddr, 'value': int(dust*100000000)})
+
+    btcchange=0
+    for x in inputs[0]:
+      btcchange=btcchange+x['value']
+    btcchange = btcchange - float(fee)/len(fromaddresses) - 11 - int(dust*100000000)
+    btc_change_outs.append({'address': fromaddresses[i], 'value': btcchange})
+
     changecolorlist.append(inamount - toamount)
 
   outs = outs + change_outs
+  outs = outs + btc_change_outs
   colorlist = colorlist+changecolorlist
-
-  print ins
-  n=0
-  for x in ins:
-    change = x['value'] - float(fee)/len(fromaddresses) - 11 - int(dust*100000000)
-    outs.append({'address': fromaddresses[n], 'value': change})
-    n=n+1
 
   tx=mktx(ins,out)
   #ADD METADATA
