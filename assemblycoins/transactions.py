@@ -591,7 +591,7 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
 
   tx=mktx(ins,outs)
   #ADD METADATA
-  metadata = 'the horror'
+  othermeta = 'the horror'
   message=bitsource.write_metadata(colorlist, othermeta)
   message=message.decode('hex')
   tx2=add_op_return(tx,message, 0)  #JUST TRANSFERS
