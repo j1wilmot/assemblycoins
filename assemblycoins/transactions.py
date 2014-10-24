@@ -565,7 +565,7 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
     toamount = toamounts[i]
     tocolor = tocolors[i]
     inputs = find_transfer_inputs(fromaddr, tocolor, toamount, fee+dust)
-    for x in inputs:
+    for x in inputs[0]:
       privkeys.append(fromprivatekeys[i])
 
     inamount = inputs[1]
