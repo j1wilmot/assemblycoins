@@ -556,6 +556,7 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
   changecolorlist=[]
   btc_change_outs=[]
   totalbtcin = 0
+  privkeys=[]
 
   for i in range(0,l):
     fromaddr = fromaddresses[i]
@@ -564,6 +565,9 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
     toamount = toamounts[i]
     tocolor = tocolors[i]
     inputs = find_transfer_inputs(fromaddr, tocolor, toamount, fee+dust)
+    for x in inputs:
+      privkeys.append(fromprivatekeys[l])
+
     inamount = inputs[1]
     ins = ins +inputs[0]
     outs.append({'address': toaddr, 'value': int(dust*100000000)})
@@ -600,7 +604,7 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
    # print tx2
 
   for i in range(len(ins)):
-   tx2=sign_tx(tx2,fromprivatekeys[i])
+   tx2=sign_tx(tx2,privkeys[i])
   print tx2
   response=pushtx(tx2)
   return response
