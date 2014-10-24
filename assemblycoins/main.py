@@ -407,7 +407,7 @@ def newwebdeclaration():
 
 #TXS
 
-@app.route(/v1/transactions/manyinout, methods['POST'])
+@app.route('/v1/transactions/manyinout', methods['POST'])
 def manyintout():
   jsoninput=json.loads(request.data)
   fromaddrs=jsoninput['public_addresses']
@@ -416,7 +416,7 @@ def manyintout():
   inamounts = jsoninput['in_amounts']
   outamounts = jsoninput['out_amounts']
   fee = jsoninput['fee']
-  
+
 
 
 @app.route('/v1/transactions/parsed/<blockn>')
