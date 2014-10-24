@@ -574,9 +574,11 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
   colorlist = colorlist+changecolorlist
 
   print ins
+  n=0
   for x in ins:
     change = x['value'] - float(fee)/len(fromaddresses) - 11 - int(dust*100000000)
-    outs.append({'address': x['address'], 'value': change})
+    outs.append({'address': fromaddresses[n], 'value': change})
+    n=n+1
 
   tx=mktx(ins,out)
   #ADD METADATA
