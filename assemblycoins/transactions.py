@@ -588,11 +588,11 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
    # print 'tx2'
    # print tx2
 
-   for i in range(len(ins)):
-     tx2=sign_tx(tx2,fromprivatekeys[i])
-   print tx2
-   response=pushtx(tx2)
-   return response
+  for i in range(len(ins)):
+   tx2=sign_tx(tx2,fromprivatekeys[i])
+  print tx2
+  response=pushtx(tx2)
+  return response
 
 
 
