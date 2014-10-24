@@ -406,6 +406,19 @@ def newwebdeclaration():
 
 
 #TXS
+
+@app.route(/v1/transactions/manyinout, methods['POST'])
+def manyintout():
+  jsoninput=json.loads(request.data)
+  fromaddrs=jsoninput['public_addresses']
+  toaddrs = jsoninput['destinations']
+  fromprivates = jsoninput['private_keys']
+  inamounts = jsoninput['in_amounts']
+  outamounts = jsoninput['out_amounts']
+  fee = jsoninput['fee']
+  
+
+
 @app.route('/v1/transactions/parsed/<blockn>')
 def oas_in_block(blockn=None):
   oas=workertasks.oa_in_block(int(blockn))

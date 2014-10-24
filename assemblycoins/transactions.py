@@ -547,6 +547,55 @@ def multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddr
       n=n+1
   return responses
 
+
+def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamounts, tocolors, fee):
+  l=len(fromaddresses)
+  ins=[]
+  outs=[]
+  change_outs=[]
+  colorlist=[]
+  changecolorlist=[]
+  totalbtcin = 0
+
+  for i in range(0,l):
+    fromaddr = fromaddresses[i]
+    toaddr = toaddresses[i]
+    fromkey = fromprivatekeys[i]
+    toamount = toamounts[i]
+    tocolor = tocolors[i]
+    inputs = find_transfer_inputs(fromaddr, tocolor, toamount, fee+dust)
+    inamount = inputs[1]
+    ins.append(inputs[0])
+    outs.append({'address': toaddr, 'value': int(dust*100000000)})
+    colorlist.append(toamount)
+    change_outs.append({'address': fromaddr, 'value': int(dust*100000000)})
+    changecolorlist.append(inamount - toamount)
+
+  outs = outs + change_outs
+  colorlist = colorlist+changecolorlist
+
+  for x in ins:
+    change = x['value'] - float(fee)/len(fromaddresses) - 11 - int(dust*100000000)
+    outs.append({'address': x['address'], 'value': change})
+
+  tx=mktx(ins,out)
+  #ADD METADATA
+  metadata = 'the horror'
+  message=bitsource.write_metadata(colorlist, othermeta)
+  message=message.decode('hex')
+  tx2=add_op_return(tx,message, 0)  #JUST TRANSFERS
+   #
+   # print 'tx2'
+   # print tx2
+
+   for i in range(len(ins)):
+     tx2=sign_tx(tx2,fromprivatekeys[i])
+   print tx2
+   response=pushtx(tx2)
+   return response
+
+
+
 def formation_message(colornumber, colorname, description):
   message={}
   message['name']=colorname
