@@ -602,7 +602,7 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
    #
    # print 'tx2'
    # print tx2
-
+  print privkeys
   for i in range(len(ins)):
    tx2=sign_tx(tx2,privkeys[i])
   print tx2
