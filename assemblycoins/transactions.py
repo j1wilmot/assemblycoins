@@ -564,7 +564,7 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
     tocolor = tocolors[i]
     inputs = find_transfer_inputs(fromaddr, tocolor, toamount, fee+dust)
     inamount = inputs[1]
-    ins.append(inputs[0])
+    ins = ins +inputs[0]
     outs.append({'address': toaddr, 'value': int(dust*100000000)})
     colorlist.append(toamount)
     change_outs.append({'address': fromaddr, 'value': int(dust*100000000)})
