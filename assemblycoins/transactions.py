@@ -582,6 +582,13 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
   outs = outs + btc_change_outs
   colorlist = colorlist+changecolorlist
 
+  print "ins"
+  print ins
+  print ''
+  print 'outs'
+  print outs
+  print ''
+
   tx=mktx(ins,outs)
   #ADD METADATA
   metadata = 'the horror'
