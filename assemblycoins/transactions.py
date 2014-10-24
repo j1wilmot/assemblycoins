@@ -592,6 +592,7 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
   print 'outs'
   print outs
   print ''
+  print colorlist
 
   tx=mktx(ins,outs)
   #ADD METADATA
