@@ -547,7 +547,6 @@ def multiple_transfer_txs(fromaddr, dest_array, fee_each, privatekey, sourceaddr
       n=n+1
   return responses
 
-
 def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamounts, tocolors, fee):
   l=len(fromaddresses)
   ins=[]
@@ -574,6 +573,7 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
   outs = outs + change_outs
   colorlist = colorlist+changecolorlist
 
+  print ins
   for x in ins:
     change = x['value'] - float(fee)/len(fromaddresses) - 11 - int(dust*100000000)
     outs.append({'address': x['address'], 'value': change})
