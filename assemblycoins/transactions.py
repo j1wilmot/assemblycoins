@@ -582,7 +582,7 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
   outs = outs + btc_change_outs
   colorlist = colorlist+changecolorlist
 
-  tx=mktx(ins,out)
+  tx=mktx(ins,outs)
   #ADD METADATA
   metadata = 'the horror'
   message=bitsource.write_metadata(colorlist, othermeta)
