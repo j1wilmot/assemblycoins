@@ -577,7 +577,7 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
     btcchange=0
     for x in inputs[0]:
       btcchange=btcchange+x['value']
-    btcchange = int(btcchange - float(fee)/len(fromaddresses) - 11 - int(dust*100000000))
+    btcchange = int(btcchange - fee - int(dust*100000000))
     btc_change_outs.append({'address': fromaddresses[i], 'value': btcchange})
 
     changecolorlist.append(inamount - toamount)
