@@ -48,7 +48,7 @@ def tx_lookup_node(txhash):
 
 def script_to_coloraddress(script):
   ripehash=leb128.ripehash(script)
-  answer=cointools.base58CheckEncode(0x05, ripehash.decode('hex'))
+  answer=cointools.base58CheckEncode(0x23, ripehash.decode('hex'))
   return answer
 
 def color_address(publicaddress):
