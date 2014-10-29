@@ -613,11 +613,7 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
   response=pushtx(tx2)
   return response
 #transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamounts, tocolors, fee):
- transfer_multiple_hetero(['1MRuSdYzMHmifxw7FwpYpzcoPDRm2J5VLv', '1FofK5MoPp2fC8VmWBiaL7tA76kurmLcBB'],
-  ['1FofK5MoPp2fC8VmWBiaL7tA76kurmLcBB', '1MRuSdYzMHmifxw7FwpYpzcoPDRm2J5VLv'],
-  ['5KkEKXmPhyzxcgkUqtqdk7id2ijbaXBwmkZ6rCqrQJx5nyWWdLa','5JrhnyvG4q7KfZdRzqSuLBL483DS42JuZNkjrt1mUi7qLrnkQBw'],
-  [1000,37], ['3MW3tV3cLtPwFx6Xo3x9M9CR1iokLdyfSF','3JPHyyGr3qij9sLBdtEgWbivRQn2TT57dF'],
-  0.0001)
+transfer_multiple_hetero(['1MRuSdYzMHmifxw7FwpYpzcoPDRm2J5VLv', '1FofK5MoPp2fC8VmWBiaL7tA76kurmLcBB'],['1FofK5MoPp2fC8VmWBiaL7tA76kurmLcBB', '1MRuSdYzMHmifxw7FwpYpzcoPDRm2J5VLv'], ['5KkEKXmPhyzxcgkUqtqdk7id2ijbaXBwmkZ6rCqrQJx5nyWWdLa','5JrhnyvG4q7KfZdRzqSuLBL483DS42JuZNkjrt1mUi7qLrnkQBw'], [1000,37], ['3MW3tV3cLtPwFx6Xo3x9M9CR1iokLdyfSF','3JPHyyGr3qij9sLBdtEgWbivRQn2TT57dF'], 0.0001)
 
 def formation_message(colornumber, colorname, description):
   message={}
