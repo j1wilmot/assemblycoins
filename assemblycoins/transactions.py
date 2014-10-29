@@ -407,17 +407,13 @@ def create_transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, colo
   if leftover_btc>int(dust*100000000):
     outputs.append(btcchange)
 
-  # print ''
-  # print ''
-  # print "CREATE TX TRANSFER MULTIPLE"
-  # print 'inputs'
-  # print inputs
-  # print ''
-  # print 'outputs'
-  # print outputs
-  # print ''
+  try:
+    tx=mktx(inputs, outputs)
+  except:
+    print inputs
+    print outputs
+    print "ERROR MKTX"
 
-  tx=mktx(inputs, outputs)
   #
   # print 'tx'
   # print tx
