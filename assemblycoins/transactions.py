@@ -60,7 +60,7 @@ def make_raw_transaction(fromaddress,amount,destination, fee):
       try:
         tx=mktx(ins,outs)
       except:
-        tx=None
+        tx=''
         print "PROBLEM MAKING TX"
         print ins
         print ''
@@ -613,11 +613,11 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
   response=pushtx(tx2)
   return response
 #transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamounts, tocolors, fee):
-transfer_multiple_hetero(['1Pd79NSBYVWc6rPeKJ6bu79H1DcihY9TDN', '1KqvqV1WsvhNCoDrum74hc1xopqCgrAhqn'],
- ['1KqvqV1WsvhNCoDrum74hc1xopqCgrAhqn', '1Pd79NSBYVWc6rPeKJ6bu79H1DcihY9TDN'],
- ['5JFf2FNPDhzU3SpSPJF9ovhifRbA1yQMDqNYmTmVT99mxG5Dj4D','5HxEui6cgnEJq2Yoobm9PLxTopFwj4x3CUaNoWWdXBdAQeC7VgW'],
- [14,38], ['39sGdPUNWDbKbjRg3zBRLwGcbkxaJJQbTx','39yBQTsTBCHd1qbQGtSbedoQ1yJWBMheiZ'],
- 0.0001)
+# transfer_multiple_hetero(['1Pd79NSBYVWc6rPeKJ6bu79H1DcihY9TDN', '1KqvqV1WsvhNCoDrum74hc1xopqCgrAhqn'],
+#  ['1KqvqV1WsvhNCoDrum74hc1xopqCgrAhqn', '1Pd79NSBYVWc6rPeKJ6bu79H1DcihY9TDN'],
+#  ['5JFf2FNPDhzU3SpSPJF9ovhifRbA1yQMDqNYmTmVT99mxG5Dj4D','5HxEui6cgnEJq2Yoobm9PLxTopFwj4x3CUaNoWWdXBdAQeC7VgW'],
+#  [14,38], ['39sGdPUNWDbKbjRg3zBRLwGcbkxaJJQbTx','39yBQTsTBCHd1qbQGtSbedoQ1yJWBMheiZ'],
+#  0.0001)
 
 def formation_message(colornumber, colorname, description):
   message={}

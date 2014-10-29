@@ -199,7 +199,10 @@ def tx_queue_batches():
           fee=os.environ['STANDARD_BTC_FEE']
           #print str(public_address)+" / "+str(amount)+ " / "+str(destination)+" / "+str(fee)
           tx=transactions.make_raw_transaction(public_address,amount,destination, fee)
-          tx2=transactions.sign_tx(tx, private_key)
+          try:
+              tx2=transactions.sign_tx(tx, private_key)
+          except:
+              tx2=''
           tx3=transactions.pushtx(tx2)
           if len(tx3)>0:
             databases.dbexecute("update tx_queue set success='True', txhash='"+str(tx3)+"' where randomid='"+str(x[10])+"'", False)
