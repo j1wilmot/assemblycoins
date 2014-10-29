@@ -559,6 +559,11 @@ def schedule_transfer():
   privatekey=str(jsoninput['from_private_key'])
   sourceaddress=str(jsoninput['issuing_address'])
   coloramt=str(jsoninput['transfer_amount'])
+  if 'type' in jsoninput:
+      atype = str(jsoninput['type'])
+  else:
+      atype=''
+
 
   r=str(random.random())
   random_id=str(hashlib.sha256(r).hexdigest())
@@ -566,9 +571,9 @@ def schedule_transfer():
   callback_url=None
   if 'callback_url' in jsoninput:
     callback_url=jsoninput['callback_url']
-    dbstring="insert into tx_queue (first_tried_at_block, success, from_public, from_private, destination, fee_each, source_address, transfer_amount, callback_url, randomid) values ('-1','False"+"','"+fromaddr+"','"+privatekey+"','"+dest+"','"+fee_each+"','"+sourceaddress+"','"+coloramt+"','"+callback_url+"','"+str(random_id)+"');"
+    dbstring="insert into tx_queue (first_tried_at_block, success, from_public, from_private, destination, fee_each, source_address, transfer_amount, callback_url, randomid, type) values ('-1','False"+"','"+fromaddr+"','"+privatekey+"','"+dest+"','"+fee_each+"','"+sourceaddress+"','"+coloramt+"','"+callback_url+"','"+str(random_id)+"','"+str(atype)+"');"
   else:
-    dbstring="insert into tx_queue (first_tried_at_block, success, from_public, from_private, destination, fee_each, source_address, transfer_amount, randomid) values ('-1','False"+"','"+fromaddr+"','"+privatekey+"','"+dest+"','"+fee_each+"','"+sourceaddress+"','"+coloramt+"','"+str(random_id)+"');"
+    dbstring="insert into tx_queue (first_tried_at_block, success, from_public, from_private, destination, fee_each, source_address, transfer_amount, randomid, type) values ('-1','False"+"','"+fromaddr+"','"+privatekey+"','"+dest+"','"+fee_each+"','"+sourceaddress+"','"+coloramt+"','"+str(random_id)+"','"+str(atype)+"');"
 
   databases.dbexecute(dbstring,False)
 

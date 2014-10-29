@@ -209,7 +209,7 @@ def tx_queue_batches():
 
       else:
         color_needed=0
-        txs=databases.dbexecute("select * from tx_queue where from_public='"+sender+"' and success='False' and source_address='"+color[0]+"';",True)
+        txs=databases.dbexecute("select * from tx_queue where from_public='"+sender+"' and success='False' and type='' and source_address='"+color[0]+"';",True)
         coloramt_array=[]
         dest_array=[]
         fromaddr=sender
