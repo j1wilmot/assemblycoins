@@ -611,7 +611,7 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
 
   for i in range(len(ins)):
     print privkeys[i]
-    tx2=sign_tx(tx2,privkeys[i])
+    tx2=sign(tx2,i, privkeys[i])
   print tx2
   response=pushtx(tx2)
   return response
