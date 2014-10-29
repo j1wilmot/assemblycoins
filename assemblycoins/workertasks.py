@@ -245,30 +245,30 @@ def tx_queue_batches():
         inputcolortamt=inputs[1]
         inputs=inputs[0]
 
-        #try:
-        if len(dest_array)>6:
-          fee_each=fee_each*(1+len(dest_array)/6)
+        if len(txs)>0:
+            if len(dest_array)>6:
+              fee_each=fee_each*(1+len(dest_array)/6)
 
-        print str(fromaddr)+ " / "+ str(dest_array) + " / "+str(fee_each)+ " / "+str(privatekey)+" / " +str(sourceaddress)+" / "+str(coloramt_array)+" / "+str(othermeta)
-        result=transactions.transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array, othermeta)
-        try:
-          result=result[0]
-        except:
-          print result
-          result=None
-        #except:
-        #  print "ERROR processing queued TX from "+str(fromaddr)
-      #    result=None
+            print str(fromaddr)+ " / "+ str(dest_array) + " / "+str(fee_each)+ " / "+str(privatekey)+" / " +str(sourceaddress)+" / "+str(coloramt_array)+" / "+str(othermeta)
+            result=transactions.transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array, othermeta)
+            try:
+              result=result[0]
+            except:
+              print result
+              result=None
+            #except:
+            #  print "ERROR processing queued TX from "+str(fromaddr)
+          #    result=None
 
-        if result is None:
-          print "No response heard from Bitcoin Network"
-        elif not str(result)=="None":
-          print "HEARD TX RESULT: "+str(result)
+            if result is None:
+              print "No response heard from Bitcoin Network"
+            elif not str(result)=="None":
+              print "HEARD TX RESULT: "+str(result)
 
-          for id in rowlist:
-            dbstring2="update tx_queue set txhash='"+str(result) +"', success='True' where randomid='"+str(id)+"';"
-            print dbstring2
-            databases.dbexecute(dbstring2,False)
+              for id in rowlist:
+                dbstring2="update tx_queue set txhash='"+str(result) +"', success='True' where randomid='"+str(id)+"';"
+                print dbstring2
+                databases.dbexecute(dbstring2,False)
 
 def tx_queue():
   dbstring="select * from tx_queue where success='False';"

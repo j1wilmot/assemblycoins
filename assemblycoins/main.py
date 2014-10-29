@@ -564,7 +564,6 @@ def schedule_transfer():
   else:
       atype=''
 
-
   r=str(random.random())
   random_id=str(hashlib.sha256(r).hexdigest())
 
