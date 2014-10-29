@@ -604,9 +604,11 @@ def transfer_multiple_hetero(fromaddresses, toaddresses, fromprivatekeys, toamou
   message=message.decode('hex')
   tx2=add_op_return(tx,message, 0)  #JUST TRANSFERS
    #
-   # print 'tx2'
-   # print tx2
+  print 'tx2'
+  print tx2
+  print ''
   print privkeys
+
   for i in range(len(ins)):
     print privkeys[i]
     tx2=sign_tx(tx2,privkeys[i])
