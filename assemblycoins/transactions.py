@@ -483,7 +483,7 @@ def find_transfer_inputs(fromaddr, coloraddress, coloramt, btc):
 
 
       for x in forbidden_inputs:
-          outp = x['output']
+          outp = x[7]
           found=false
           for y in answer:
               if y['output'] == outp:
