@@ -211,7 +211,7 @@ def tx_queue_batches():
 
         txs=databases.dbexecute("select * from tx_queue where from_public='"+sender+"' and success='False' and source_address='"+color[0]+"';",True)
 
-        tx_lists = split_lists(15, txs)
+        tx_lists = bitsource.split_lists(15, txs)
 
         for txs in tx_lists:
             color_needed=0
