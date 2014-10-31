@@ -216,3 +216,16 @@ def check_if_output_misspent(txhash, index):
   else:
     print str(txhash)
   return spent
+
+
+def split_lists(length_each, biglist):
+    list_of_lists=[]
+    l= []
+    for i in range(0,len(biglist)):
+        if i%length_each == 0:
+            list_of_lists.append(l)
+            l=[]
+            l.append(biglist[i])
+        else:
+            l.append(biglist[i])
+    return list_of_lists

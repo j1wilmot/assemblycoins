@@ -208,67 +208,69 @@ def tx_queue_batches():
             databases.dbexecute("update tx_queue set success='True', txhash='"+str(tx3)+"' where randomid='"+str(x[10])+"'", False)
 
       else:
-        color_needed=0
+
         txs=databases.dbexecute("select * from tx_queue where from_public='"+sender+"' and success='False' and source_address='"+color[0]+"';",True)
-        coloramt_array=[]
-        dest_array=[]
-        fromaddr=sender
-        btc_needed=0
-        feestotal=0
-        rowlist=[]
 
-        if len(txs)>10:  #limit outputs per TX
-          txs=txs[0:10]
+        tx_lists = split_lists(15, txs)
 
-        for tx in txs:
-          color_needed=color_needed+tx[5]
-          fee_each=float(tx[3])*0.00000001
-          btc_needed=btc_needed+int(transactions.dust*100000000) #INTEGER, IN SATOSHIs
-          feestotal=feestotal+int(tx[3])
+        for txs in tx_lists:
+            color_needed=0
+            coloramt_array=[]
+            dest_array=[]
+            fromaddr=sender
+            btc_needed=0
+            feestotal=0
+            rowlist=[]
 
-          if tx[5]>0:
-            dest_array.append(tx[2])
-            coloramt_array.append(tx[5])
+            for tx in txs:
+              color_needed=color_needed+tx[5]
+              fee_each=float(tx[3])*0.00000001
+              btc_needed=btc_needed+int(transactions.dust*100000000) #INTEGER, IN SATOSHIs
+              feestotal=feestotal+int(tx[3])
 
-          privatekey=tx[1]
-          othermeta="multitransfer"
-          rowlist.append(tx[10])
+              if tx[5]>0:
+                dest_array.append(tx[2])
+                coloramt_array.append(tx[5])
 
-        if feestotal>10000:
-          feestotal = 10000 *(1+len(txs)/5)
-        btc_needed=btc_needed+feestotal
+              privatekey=tx[1]
+              othermeta="multitransfer"
+              rowlist.append(tx[10])
 
-        sourceaddress=color[0]
-        coloraddress=databases.first_coloraddress_from_sourceaddress(sourceaddress)
-        btc_needed=float(btc_needed)/100000000
-        inputs=transactions.find_transfer_inputs(fromaddr, coloraddress, color_needed, btc_needed)
-        inputcolortamt=inputs[1]
-        inputs=inputs[0]
+            if feestotal>10000:
+              feestotal = 10000 *(1+len(txs)/5)
+            btc_needed=btc_needed+feestotal
 
-        if len(txs)>0:
-            if len(dest_array)>6:
-              fee_each=fee_each*(1+len(dest_array)/6)
+            sourceaddress=color[0]
+            coloraddress=databases.first_coloraddress_from_sourceaddress(sourceaddress)
+            btc_needed=float(btc_needed)/100000000
+            inputs=transactions.find_transfer_inputs(fromaddr, coloraddress, color_needed, btc_needed)
+            inputcolortamt=inputs[1]
+            inputs=inputs[0]
 
-            print str(fromaddr)+ " / "+ str(dest_array) + " / "+str(fee_each)+ " / "+str(privatekey)+" / " +str(sourceaddress)+" / "+str(coloramt_array)+" / "+str(othermeta)
-            result=transactions.transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array, othermeta)
-            try:
-              result=result[0]
-            except:
-              print result
-              result=None
-            #except:
-            #  print "ERROR processing queued TX from "+str(fromaddr)
-          #    result=None
+            if len(txs)>0:
+                if len(dest_array)>6:
+                  fee_each=fee_each*(1+len(dest_array)/6)
 
-            if result is None:
-              print "No response heard from Bitcoin Network"
-            elif not str(result)=="None":
-              print "HEARD TX RESULT: "+str(result)
+                print str(fromaddr)+ " / "+ str(dest_array) + " / "+str(fee_each)+ " / "+str(privatekey)+" / " +str(sourceaddress)+" / "+str(coloramt_array)+" / "+str(othermeta)
+                result=transactions.transfer_tx_multiple(fromaddr, dest_array, fee_each, privatekey, sourceaddress, coloramt_array, othermeta)
+                try:
+                  result=result[0]
+                except:
+                  print result
+                  result=None
+                #except:
+                #  print "ERROR processing queued TX from "+str(fromaddr)
+              #    result=None
 
-              for id in rowlist:
-                dbstring2="update tx_queue set txhash='"+str(result) +"', success='True' where randomid='"+str(id)+"';"
-                print dbstring2
-                databases.dbexecute(dbstring2,False)
+                if result is None:
+                  print "No response heard from Bitcoin Network"
+                elif not str(result)=="None":
+                  print "HEARD TX RESULT: "+str(result)
+
+                  for id in rowlist:
+                    dbstring2="update tx_queue set txhash='"+str(result) +"', success='True' where randomid='"+str(id)+"';"
+                    print dbstring2
+                    databases.dbexecute(dbstring2,False)
 
 def tx_queue():
   dbstring="select * from tx_queue where success='False';"
